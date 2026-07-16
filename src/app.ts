@@ -7,8 +7,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes will go here later
-// app.use("/api", routes);
+import projectRoutes from "./routes/project.routes";
+
+app.use("/api/get-projects", projectRoutes);
 
 app.get("/", (req, res) => {
     res.send("LaunchDeck Server is Running 🚀");
