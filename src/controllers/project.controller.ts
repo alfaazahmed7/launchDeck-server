@@ -126,7 +126,7 @@ export const getProjectById = async (
     try {
         const { id } = req.params;
 
-        const project = await Project.findOne({ id });
+        const project = await Project.findOne({ _id: new Object(id) });
 
         if (!project) {
             res.status(404).json({
