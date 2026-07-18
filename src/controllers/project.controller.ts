@@ -145,3 +145,30 @@ export const getProjectById = async (
         });
     }
 };
+
+export const getFeaturedProjects = async (
+    req: Request,
+    res: Response
+): Promise<void> => {
+    try {
+        const featuredProjects = await Project.find({
+            featured: true
+        }).limit(6);
+
+        if (featuredProjects.length === 0) {
+            res.status(404).json({
+                message: "Project not found.",
+            });
+
+            return;
+        }
+        res.status(200).json(featuredProjects);
+    }
+    catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to fetch project.",
+        });
+    }
+}
