@@ -119,6 +119,31 @@ export const getProjects = async (
     }
 };
 
+export const getProjectsForCategory = async (
+    req: Request,
+    res: Response
+): Promise<void> => {
+    try {
+        const project = await Project.find();
+
+        if (project.length === 0) {
+            res.status(404).json({
+                message: "Project not found.",
+            });
+
+            return;
+        }
+        res.status(200).json(project);
+    }
+    catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to fetch project.",
+        });
+    }
+}
+
 export const getProjectById = async (
     req: Request,
     res: Response
