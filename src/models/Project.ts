@@ -2,7 +2,6 @@
 import { Schema, model, Document } from "mongoose";
 
 export interface IProject extends Document {
-    id: string;
     name: string;
     tagline: string;
     category: string;
@@ -22,11 +21,6 @@ export interface IProject extends Document {
 }
 
 const projectSchema = new Schema<IProject>({
-    id: {
-        type: String,
-        required: true,
-        unique: true,
-    },
     name: {
         type: String,
         required: true,
@@ -45,12 +39,10 @@ const projectSchema = new Schema<IProject>({
     },
     difficulty: {
         type: String,
-        enum: ["Beginner", "Intermediate", "Advanced"],
         required: true,
     },
     status: {
         type: String,
-        enum: ["Idea", "Development", "Production"],
         required: true,
     },
     publishedDate: {
