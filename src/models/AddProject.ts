@@ -2,6 +2,9 @@ import { Schema, model, Document } from "mongoose";
 
 export interface IUserProject extends Document {
     name: string;
+    userId: string,
+    userEmail: string,
+    userName: string,
     tagline: string;
     category: string;
     technologies: string[];
@@ -21,6 +24,9 @@ export interface IUserProject extends Document {
 
 const userProjectSchema = new Schema<IUserProject>({
     name: { type: String, required: true },
+    userId: { type: String, required: true },
+    userEmail: { type: String, required: true },
+    userName: { type: String, required: true },
     tagline: { type: String, required: true },
     category: { type: String, required: true },
     technologies: [{ type: String, required: true }],
