@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Project from "../models/Project";
+import UserProject from "../models/AddProject";
 
 export const getProjects = async (
     req: Request,
@@ -151,13 +152,17 @@ export const getProjectById = async (
     try {
         const { id } = req.params;
 
-        const project = await Project.findOne({ _id: new Object(id) });
+        let project = null;
+        project = await Project.findById(id);
+
+        if (!project) {
+            project = await UserProject.findById(id);
+        }
 
         if (!project) {
             res.status(404).json({
                 message: "Project not found.",
             });
-
             return;
         }
 
