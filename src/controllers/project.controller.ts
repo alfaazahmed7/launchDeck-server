@@ -152,8 +152,7 @@ export const getProjectById = async (
     try {
         const { id } = req.params;
 
-        let project = null;
-        project = await Project.findById(id);
+        let project = await Project.findById(id);
 
         if (!project) {
             project = await UserProject.findById(id);

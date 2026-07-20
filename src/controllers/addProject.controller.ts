@@ -54,3 +54,40 @@ export const getUserProjects = async (
         });
     }
 }
+
+export const deleteUserProject = async (
+    req: Request,
+    res: Response
+) => {
+    try {
+        const projectId = req.query.projectId as string;
+        console.log(projectId);
+
+        if (!projectId) {
+            res.status(400).json({
+                message: "projectId is required",
+            });
+            return;
+        }
+
+        const deletedProject = await UserProject.findByIdAndDelete(projectId);
+
+        if (!deletedProject) {
+            res.status(404).json({
+                message: "Project not found",
+            });
+            return;
+        }
+
+        res.status(200).json({
+            message: "Project deleted successfully",
+            project: deletedProject,
+        });
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to delete project.",
+        });
+    }
+};
