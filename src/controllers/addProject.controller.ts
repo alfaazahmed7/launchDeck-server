@@ -22,3 +22,35 @@ export const addProject = async (
         });
     }
 };
+
+export const getUserProjects = async (
+    req: Request,
+    res: Response
+) => {
+    try {
+        const userEmail = req.query.userEmail as string;
+        if (!userEmail) {
+            res.status(400).json({
+                message: "userEmail is required.",
+            });
+            return;
+        }
+
+        const project = await UserProject.find({ userEmail });
+        if (project.length === 0) {
+            res.status(404).json({
+                message: "Project not found.",
+            });
+
+            return;
+        }
+        res.status(200).json(project);
+    }
+    catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to fetch project.",
+        });
+    }
+}

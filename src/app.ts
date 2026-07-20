@@ -10,9 +10,11 @@ app.use(express.json());
 // Route imports
 import projectRoutes from "./routes/project.routes";
 import addProjectRoutes from "./routes/addProject.routes";
+import getUserProjectsRoutes from "./routes/getUserProject.routes";
 
 app.use("/api/projects", projectRoutes);
 app.use("/api/add-project", addProjectRoutes);
+app.use("/api/get-user-projects", getUserProjectsRoutes);
 
 app.get("/", (req, res) => {
     res.send("LaunchDeck Server is Running 🚀");
