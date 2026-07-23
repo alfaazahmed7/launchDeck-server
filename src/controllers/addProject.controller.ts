@@ -37,13 +37,6 @@ export const getUserProjects = async (
         }
 
         const project = await UserProject.find({ userEmail });
-        if (project.length === 0) {
-            res.status(404).json({
-                message: "Project not found.",
-            });
-
-            return;
-        }
         res.status(200).json(project);
     }
     catch (error) {
